@@ -11,13 +11,15 @@ resolve ({data})}
 }
 
 
-export   function fetchAllProductsByFilters(filter,sort) {
+export   function fetchAllProductsByFilters(filter,sort,pagination) {
 
   
   console.log("passed object is : ", filter);
   // Formate of filter and sort object to pass it in api
+
  //filter= {"category":["smartPhone", "laptop","fragrance"]}
  //sort = {_sort:"price", _order:"desc"}
+ // pagination = {_page:1, _limit:10} --> sample of query string 
 
 
  let queryString = '';
@@ -28,23 +30,37 @@ export   function fetchAllProductsByFilters(filter,sort) {
    if(categoryvalues.length)
    {
 
-     const lastCategoryValue = categoryvalues[(categoryvalues.length)-1];
+     const lastCategoryValue = categoryvalues[categoryvalues.length-1];
      console.log("Last value: ",lastCategoryValue);
      queryString+= `${key}=${lastCategoryValue}&`
-   }
+
+     
+    }
+    console.log( "String is in filter  ",queryString);
   }
 
   for (let key in sort)
   {
     queryString+= `${key}=${sort[key]}&`
 
+    console.log( "String is in sort  ",queryString);
   }
-  console.log( "String is ",queryString);
+
+
+  for (let key in pagination)
+  {
+    queryString+= `${key}=${pagination[key]}&`
+
+    console.log( "String is in sort  ",queryString);
+  }
+ 
  
 
 
-  return new Promise(async (resolve) =>{const response = await fetch('http://localhost:8080/products?'+queryString)
+  return new Promise(async (resolve) =>{
+  const response = await fetch('http://localhost:8080/products?'+queryString)
 const data = await response.json()
-resolve ({data})}
+const totalItems = await response.headers.get('X-Total-Count') //json server give us total onject in header , recieving that here 
+resolve ({data:{products:data,totalItems:+totalItems}})}  // + is used to convert it into numbers 
   );
 }

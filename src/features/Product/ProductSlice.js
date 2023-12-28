@@ -4,6 +4,7 @@ import { fetchAllProducts, fetchAllProductsByFilters } from './ProductAPI';
 const initialState = {
   products: [],
   status: 'idle',
+  totalItems:0
 };
 
 
@@ -21,8 +22,8 @@ export const fetchAllProductsAsync = createAsyncThunk(
 
 export const fetchAllProductsByFiltersAsync = createAsyncThunk(
   'product/fetchAllProductsByFilters',
-  async ({filter,sort}) => {
-    const response = await fetchAllProductsByFilters(filter,sort);
+  async ({filter,sort,pagination}) => {
+    const response = await fetchAllProductsByFilters(filter,sort,pagination);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -55,7 +56,8 @@ export const productSlice = createSlice({
       })
       .addCase(fetchAllProductsByFiltersAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.products = action.payload;
+        state.products = action.payload.products;
+        state.totalItems = action.payload.totalItems;
       });
   },
   
@@ -65,6 +67,7 @@ export const { increment, decrement, incrementByAmount } = productSlice.actions;
 
 
 export const selectAllProducts = (state) => state.product.products;
+export const selectTotalItems = (state) => state.product.totalItems;
 console.log({selectAllProducts})
 
 
