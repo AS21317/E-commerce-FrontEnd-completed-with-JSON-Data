@@ -11,6 +11,31 @@ resolve ({data})}
 }
 
 
+// A mock function to mimic making an async request for data
+export   function fetchProductById(id) {
+  return new Promise(async (resolve) =>{const response = await fetch('http://localhost:8080/products/'+id)
+const data = await response.json()
+resolve ({data})}
+  );
+}
+
+
+export   function fetchAllCategories() {
+  return new Promise(async (resolve) =>{const response = await fetch('http://localhost:8080/categories')
+const data = await response.json()
+resolve ({data})}
+  );
+}
+
+
+
+export   function fetchAllBrands() {
+  return new Promise(async (resolve) =>{const response = await fetch('http://localhost:8080/brands')
+const data = await response.json()
+resolve ({data})}
+  );
+}
+
 export   function fetchAllProductsByFilters(filter,sort,pagination) {
 
   
