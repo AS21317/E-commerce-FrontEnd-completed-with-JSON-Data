@@ -2340,13 +2340,42 @@
       "password": "Ashish@1234",
       "addresses": [
         {
-          "name": "Margaret Hughes",
-          "email": "lywenozyzo@mailinator.com",
-          "phone": "+1 (215) 223-5303",
+          "name": "Ashish singh",
+          "email": "As@gmial.com",
+          "phone": "23892231221",
           "street": "Velit in facere aper",
           "city": "Nisi magnam quos mol",
           "state": "Minus aperiam repreh",
-          "pinCode": "44"
+          "pinCode": "44",
+          "pincode": "44",
+          "phonee": "+1 (215) 223-5303"
+        },
+        {
+          "name": "Jane Vaughn",
+          "email": "fetiqahy@mailinator.com",
+          "phone": "+1 (541) 158-2916",
+          "street": "Ut amet harum ut mi",
+          "city": "Dolore eum enim ipsa",
+          "state": "Irure ex est libero ",
+          "pinCode": "82"
+        },
+        {
+          "name": "Amena Mcdonald",
+          "email": "topodiry@mailinator.com",
+          "phone": "+1 (359) 559-9141",
+          "street": "Asperiores eligendi ",
+          "city": "Temporibus quam ipsa",
+          "state": "Nihil aliquip id nu",
+          "pinCode": "33"
+        },
+        {
+          "name": "Fuller Shelton",
+          "email": "fylivo@mailinator.com",
+          "phone": "+1 (234) 957-2578",
+          "street": "Architecto quis natu",
+          "city": "Excepteur recusandae",
+          "state": "Quia necessitatibus ",
+          "pinCode": "76"
         }
       ],
       "id": 1,
@@ -2355,19 +2384,9 @@
     {
       "email": "As@gmail.com",
       "password": "As@111111",
-      "addresses": [
-        {
-          "name": "Drake Mann",
-          "email": "pexegy@mailinator.com",
-          "phone": "+1 (879) 336-1198",
-          "street": "Iure veritatis magna",
-          "city": "Reiciendis omnis qui",
-          "state": "Numquam vero magna a",
-          "pinCode": "36"
-        }
-      ],
+      "addresses": [],
       "id": 2,
-      "quantity": 2
+      "quantity": 3
     }
   ],
   "cart": [],
@@ -2614,6 +2633,238 @@
       },
       "status": "pending",
       "id": 4
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/1/1.jpg",
+            "https://i.dummyjson.com/data/products/1/2.jpg",
+            "https://i.dummyjson.com/data/products/1/3.jpg",
+            "https://i.dummyjson.com/data/products/1/4.jpg",
+            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 1
+        }
+      ],
+      "totalAmount": 549,
+      "totalItems": 1,
+      "user": {
+        "email": "As@gmail.com",
+        "password": "As@111111",
+        "addresses": [
+          {
+            "name": "Drake Mann",
+            "email": "pexegy@mailinator.com",
+            "phone": "+1 (879) 336-1198",
+            "street": "Iure veritatis magna",
+            "city": "Reiciendis omnis qui",
+            "state": "Numquam vero magna a",
+            "pinCode": "36"
+          },
+          {
+            "name": "Phoebe Padilla",
+            "email": "worut@mailinator.com",
+            "phone": "+1 (507) 301-7576",
+            "street": "Reprehenderit cupid",
+            "city": "Vel quia aut reprehe",
+            "state": "Ut aperiam enim dele",
+            "pinCode": "34"
+          }
+        ],
+        "id": 2,
+        "quantity": 3
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Phoebe Padilla",
+        "email": "worut@mailinator.com",
+        "phone": "+1 (507) 301-7576",
+        "street": "Reprehenderit cupid",
+        "city": "Vel quia aut reprehe",
+        "state": "Ut aperiam enim dele",
+        "pinCode": "34"
+      },
+      "status": "pending",
+      "id": 5
+    },
+    {
+      "items": [
+        {
+          "title": "Infinix INBOOK",
+          "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+          "price": 1099,
+          "discountPercentage": 11.83,
+          "rating": 4.54,
+          "stock": 96,
+          "brand": "Infinix",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/9/1.jpg",
+            "https://i.dummyjson.com/data/products/9/2.png",
+            "https://i.dummyjson.com/data/products/9/3.png",
+            "https://i.dummyjson.com/data/products/9/4.jpg",
+            "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 1099,
+      "totalItems": 1,
+      "user": {
+        "email": "ashish@gmain.co",
+        "password": "Ashish@1234",
+        "addresses": [
+          {
+            "name": "Ashish singh",
+            "email": "As@gmial.com",
+            "phone": "23892231221",
+            "street": "Velit in facere aper",
+            "city": "Nisi magnam quos mol",
+            "state": "Minus aperiam repreh",
+            "pinCode": "44",
+            "pincode": "44",
+            "phonee": "+1 (215) 223-5303"
+          },
+          {
+            "name": "Jane Vaughn",
+            "email": "fetiqahy@mailinator.com",
+            "phone": "+1 (541) 158-2916",
+            "street": "Ut amet harum ut mi",
+            "city": "Dolore eum enim ipsa",
+            "state": "Irure ex est libero ",
+            "pinCode": "82"
+          },
+          {
+            "name": "Amena Mcdonald",
+            "email": "topodiry@mailinator.com",
+            "phone": "+1 (359) 559-9141",
+            "street": "Asperiores eligendi ",
+            "city": "Temporibus quam ipsa",
+            "state": "Nihil aliquip id nu",
+            "pinCode": "33"
+          },
+          {
+            "name": "Fuller Shelton",
+            "email": "fylivo@mailinator.com",
+            "phone": "+1 (234) 957-2578",
+            "street": "Architecto quis natu",
+            "city": "Excepteur recusandae",
+            "state": "Quia necessitatibus ",
+            "pinCode": "76"
+          }
+        ],
+        "id": 1,
+        "quantity": 3
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Fuller Shelton",
+        "email": "fylivo@mailinator.com",
+        "phone": "+1 (234) 957-2578",
+        "street": "Architecto quis natu",
+        "city": "Excepteur recusandae",
+        "state": "Quia necessitatibus ",
+        "pinCode": "76"
+      },
+      "status": "pending",
+      "id": 6
+    },
+    {
+      "items": [
+        {
+          "title": "Stylish Luxury Digital Watch",
+          "description": "Stylish Luxury Digital Watch For Girls / Women - Led Smart Ladies Watches For Girls",
+          "price": 57,
+          "discountPercentage": 9.03,
+          "rating": 4.55,
+          "stock": 77,
+          "brand": "Luxury Digital",
+          "category": "womens-watches",
+          "thumbnail": "https://i.dummyjson.com/data/products/68/thumbnail.webp",
+          "images": [
+            "https://i.dummyjson.com/data/products/68/1.jpg",
+            "https://i.dummyjson.com/data/products/68/2.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 57,
+      "totalItems": 1,
+      "user": {
+        "email": "ashish@gmain.co",
+        "password": "Ashish@1234",
+        "addresses": [
+          {
+            "name": "Ashish singh",
+            "email": "As@gmial.com",
+            "phone": "23892231221",
+            "street": "Velit in facere aper",
+            "city": "Nisi magnam quos mol",
+            "state": "Minus aperiam repreh",
+            "pinCode": "44",
+            "pincode": "44",
+            "phonee": "+1 (215) 223-5303"
+          },
+          {
+            "name": "Jane Vaughn",
+            "email": "fetiqahy@mailinator.com",
+            "phone": "+1 (541) 158-2916",
+            "street": "Ut amet harum ut mi",
+            "city": "Dolore eum enim ipsa",
+            "state": "Irure ex est libero ",
+            "pinCode": "82"
+          },
+          {
+            "name": "Amena Mcdonald",
+            "email": "topodiry@mailinator.com",
+            "phone": "+1 (359) 559-9141",
+            "street": "Asperiores eligendi ",
+            "city": "Temporibus quam ipsa",
+            "state": "Nihil aliquip id nu",
+            "pinCode": "33"
+          },
+          {
+            "name": "Fuller Shelton",
+            "email": "fylivo@mailinator.com",
+            "phone": "+1 (234) 957-2578",
+            "street": "Architecto quis natu",
+            "city": "Excepteur recusandae",
+            "state": "Quia necessitatibus ",
+            "pinCode": "76"
+          }
+        ],
+        "id": 1,
+        "quantity": 3
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Jane Vaughn",
+        "email": "fetiqahy@mailinator.com",
+        "phone": "+1 (541) 158-2916",
+        "street": "Ut amet harum ut mi",
+        "city": "Dolore eum enim ipsa",
+        "state": "Irure ex est libero ",
+        "pinCode": "82"
+      },
+      "status": "pending",
+      "id": 7
     }
   ]
 }

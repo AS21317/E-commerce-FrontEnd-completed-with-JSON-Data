@@ -26,6 +26,13 @@ import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import PageNotFound from './pages/404';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import UserOrderPage from './pages/UserOrderPage';
+import UserProfilePage from './pages/UserProfilePage';
+import { fetchLoggedInUserAsync } from './features/user/userSlice';
+import Logout from './features/auth/components/Logout';
+import ForgotPasswardPage from './pages/ForgotPasswardPage';
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -66,9 +73,28 @@ const router = createBrowserRouter([
   {
    
     path: "/orders",
-    element:(<UserOrderPage></UserOrderPage>),
+    element:(<Protected><UserOrderPage></UserOrderPage></Protected>),
     // later full page willbe added here 
   },
+
+  {
+   
+    path: "/profile",
+    element:(<Protected><UserProfilePage></UserProfilePage></Protected>),
+  },
+
+  {
+   
+    path: "/logout",
+    element:(<Protected><Logout></Logout></Protected>),
+  },
+
+  {
+   
+    path: "/forgot-password",
+    element:(<ForgotPasswardPage></ForgotPasswardPage>),
+  },
+
 
   {
    
@@ -84,11 +110,13 @@ function App() {
   // jaise hi user login kre use uska cart dikha do nav bar me hi 
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
+  
 
   useEffect(()=>{
     if(user){
 
       dispatch(fetchItemsByUserIdAsync(user.id))
+      dispatch(fetchLoggedInUserAsync(user.id))  // page load hote hi user ki sari ingo get kr lo , just after login 
     }
   },[dispatch,user])
   return (

@@ -10,6 +10,7 @@ import { deleteItemFromCartAsync, selectItems, updateCartAsync } from '../featur
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, updateUserAsync } from '../features/auth/authSlice'
 import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice'
+import { selectUserInfo } from '../features/user/userSlice'
 
 
 
@@ -18,7 +19,7 @@ import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSli
 const Checkout = () => {
     const [open, setOpen] = useState(true)
     const {register,handleSubmit,reset,watch,formState: { errors },  } = useForm()
-    const user= useSelector(selectLoggedInUser);
+    const user= useSelector(selectUserInfo);
     const [selectedAddress,setSelectedAddress] = useState(null)
     const [paymentMethod,setPaymentMethod] = useState('cash')
     const currentOrder = useSelector(selectCurrentOrder)
@@ -62,7 +63,7 @@ const Checkout = () => {
 
     }
 
-
+console.log( "In checkzout", user);
 
   return (
     <>
