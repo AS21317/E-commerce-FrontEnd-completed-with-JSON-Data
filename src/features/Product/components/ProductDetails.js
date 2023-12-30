@@ -57,7 +57,9 @@ export default function ProductDetails() {
 
   const handleCart=(e)=>{
     e.preventDefault()
-  dispatch(addToCartAsync({...product,quantity:1,user:user.id}))
+    const newItem = {...product , quantity:1,user:user.id}
+    delete newItem['id']; // ab json server apni id bnayega each item ke liye , and same item can be added multiple time now
+  dispatch(addToCartAsync(newItem))
 
   }
 

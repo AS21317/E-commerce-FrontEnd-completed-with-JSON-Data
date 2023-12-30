@@ -5,7 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteItemFromCartAsync, selectItems, updateCartAsync } from './cartSlice'
-
+import { Navigate } from 'react-router-dom'
 
 
 
@@ -29,6 +29,9 @@ const Cart = () => {
 
   return (
     <>
+      {/* Cart me tabhi jao jab vha kuch ho */}
+     {!items.length && <Navigate to={'/'} replace={true}></Navigate>}
+
                 <div className="mx-auto  mt-24 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
                   <h2 className=' text-4xl font-bold tracking-tight text-gray-900'>Cart</h2>
                   <hr className='mb-6'/>

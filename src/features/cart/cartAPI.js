@@ -41,6 +41,32 @@ export function deleteItemFromCart(itemId) {
   });
 }
 
+
+export  function resetCart(userId) {
+
+  // पहले तो किसी particular यूजर के सारे cart item लेके आओ 
+  // then delete each of them , which has been placed for order 
+  
+  return new Promise (async (resolve)=>{
+    const response =  await fetchItemsByUserId(userId)
+    const items = response.data
+
+    for(let item of items) 
+    {
+      await deleteItemFromCart(item.id)
+    }
+    resolve({status:'Success'})
+  })
+    
+ 
+ 
+}
+
+
+
+
+
+
 export   function fetchItemsByUserId(userId) {
   return new Promise(async (resolve) =>{const response = await fetch('http://localhost:8080/cart?user='+userId)
 const data = await response.json()
