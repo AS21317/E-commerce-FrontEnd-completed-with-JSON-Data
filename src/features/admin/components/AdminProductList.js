@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon, ChevronRightIcon,StarIcon } from "@heroicons/react/20/solid";
-import { selectAllProducts,fetchAllProductsAsync,fetchAllBrandsAsync,fetchAllCategoriesAsync, fetchAllProductsByFiltersAsync, selectTotalItems, selectAllBrands, selectAllCategories } from "../ProductSlice";
+import { selectAllProducts,fetchAllProductsAsync,fetchAllBrandsAsync,fetchAllCategoriesAsync, fetchAllProductsByFiltersAsync, selectTotalItems, selectAllBrands, selectAllCategories } from "../../Product/ProductSlice";
 import { ITEM_PER_PAGE } from "../../../app/constant";
 
       import {
@@ -28,13 +28,7 @@ const sortOptions = [
   { name: "Price: Low to High", sort: "price", order:"asc",current: false },
   { name: "Price: High to Low", sort: "price", order:"desc", current: false },
 ];
-// const subCategories = [
-//   { name: "Totes", href: "#" },
-//   { name: "Backpacks", href: "#" },
-//   { name: "Travel Bags", href: "#" },
-//   { name: "Hip Bags", href: "#" },
-//   { name: "Laptop Sleeves", href: "#" },
-// ];
+
 
 
  
@@ -43,7 +37,7 @@ function classNames (...classes){
 }
 
 
-const ProductList = () => {
+const AdminProductList = () => {
   const dispatch = useDispatch()
   const [filter,setFilter] = useState({});
   const [sort,setSort] = useState({});
@@ -126,7 +120,6 @@ const ProductList = () => {
       const pagination ={_page:page,_limit:ITEM_PER_PAGE}
      
     dispatch(fetchAllProductsByFiltersAsync({filter,sort,pagination}))
-    // TODO: Server will filter the deleted product 
 
   },[dispatch,filter,sort,page]) 
 
@@ -234,7 +227,16 @@ const ProductList = () => {
 
 
                 {/* Product grid */}
-                <div className="lg:col-span-3">
+                  <div className="lg:col-span-3">
+                  <div>
+                  <Link
+                    to={'/product-form'}
+                  type="submit"
+                  className="rounded-md  bg-orange-600 px-3 py-2 mt-5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                    Add  New Product
+                    </Link>
+            </div>
                  <ProductGrid filters={filters} products={products} />
                 </div>
                 {/* End of product grid  */}
@@ -257,7 +259,7 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AdminProductList;
 
 
 function DesktopFilter({handleFilter,filters}){
@@ -521,7 +523,9 @@ function ProductGrid({products,filters}){
      
       {
     products.map((product) => (
-        <Link to={`product-details/${product.id}`}>
+       <div>
+
+       <Link to={`product-details/${product.id}`}>
           <div key={product.id} className="group  p-2 border-solid border-2 border-gray-300 relative">
           <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                   <img
@@ -557,11 +561,22 @@ function ProductGrid({products,filters}){
               </div>
              
             </div>
-            {product.deleted &&  <div>
+        {product.deleted &&  <div>
           <p className=" text-sm text-red-600 font-semibold">Product Deleted</p>
          </div>}
           </div>
         </Link>
+        <div>
+            <Link
+            to={`/product-form/edit/${product.id}`}
+        
+        type="submit"
+        className="rounded-md  bg-green-600 px-3 py-2 mt-5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Edit Product
+      </Link>
+            </div>
+      </div>
       ))}
     </div>
   </div>
