@@ -6,19 +6,14 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectItems } from '../cart/cartSlice'
+import { selectCartItems } from '../cart/cartSlice'
 import { selectLoggedInUser } from '../auth/authSlice'
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+
 const navigation = [
-  { name: ' Board', link: '#', user: true },
-  { name: 'Team', link: '#', user: true },
-  { name: 'Admin', link: '/admin', admin: true },
+  { name: ' Products', link: '/', user: true },
+  { name: 'Products', link: '/admin', admin: true },
+  { name: 'Orders', link: '/admin/orders', admin: true },
 
 ]
 const userNavigation = [
@@ -33,7 +28,7 @@ function classNames(...classes) {
 
 
 const Navbar = ({children}) => {
-  const items = useSelector(selectItems)
+  const items = useSelector(selectCartItems)
   const user = useSelector(selectLoggedInUser)
 
   return ( <>
@@ -46,10 +41,10 @@ const Navbar = ({children}) => {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <Link to={'/'}>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 ">
                     <img
-                      className="h-8 w-8"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      className="h-12 w-12 rounded-full border border-white-600"
+                     src='/e-logo3.png'
                       alt="Your Company"
                     />
                   </div>

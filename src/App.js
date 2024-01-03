@@ -6,6 +6,8 @@ import Navbar from './features/navbar/Navbar';
 import Home from './pages/Home';
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 
 import {
@@ -35,7 +37,13 @@ import AdminHome from './pages/AdminHome';
 import AdminProductDetailPage from './pages/AdminProductDetailPage';
 import ProductForm from './features/admin/components/ProductForm';
 import AdminProductFormPage from './pages/AdminProductFormPage';
+import AdminOrdersPage from './pages/AdminOrdersPage';
 
+
+const options = {
+  timeout: 5000,
+  position: positions.BOTTOM_CENTER
+};
 
 
 const router = createBrowserRouter([
@@ -84,6 +92,12 @@ const router = createBrowserRouter([
    
     path: "/product-form",
     element:(<ProtectedAdmin> <AdminProductFormPage/></ProtectedAdmin>),
+  },
+
+  {
+   
+    path: "/admin/orders",
+    element:(<ProtectedAdmin> <AdminOrdersPage/></ProtectedAdmin>),
   },
 
   {
@@ -150,7 +164,10 @@ function App() {
   return (
     <>
    <div className="App">
+   <Provider template={AlertTemplate} {...options}>
+
    <RouterProvider router={router} />
+   </Provider>
 
    </div>
    </>

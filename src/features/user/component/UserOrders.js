@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLoggedInUserOrdersAsync, selectUserInfo, selectUserOrders } from '../userSlice'
 import { Link } from 'react-router-dom'
+import { discountedPrice } from '../../../app/constant'
 
 const UserOrders = () => {
 
@@ -16,7 +17,7 @@ const UserOrders = () => {
 
     useEffect(()=>{
         dispatch(fetchLoggedInUserOrdersAsync(user.id))
-    },[])
+    },[dispatch,user])
   return (
 
     <div>
@@ -48,7 +49,7 @@ const UserOrders = () => {
                   <h3>
                     <a href={item.href}>{item.title}</a>
                   </h3>
-                  <p className="ml-4">${item.price}</p>
+                  <p className="ml-4">${discountedPrice(item)}</p>
                 </div>
                 <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
               </div>
@@ -89,15 +90,15 @@ const UserOrders = () => {
           <div className="flex min-w-0 gap-x-4">
          
             <div className="min-w-0 flex-auto">
-              <p className="text-sm font-semibold leading-6 text-gray-900"><span className='font-semibold text-lg '>Name:</span>  {order.selectedAddress.name}</p>
-              <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Street:</span>  {order.selectedAddress.street}</p>
-              <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Zip Code:</span>  {order.selectedAddress.pincode}</p>
+              <p className="text-sm font-semibold leading-6 text-gray-900"><span className='font-semibold text-lg '>Name:</span>  {order.selectedAddress?.name}</p>
+              <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Street:</span>  {order.selectedAddress?.street}</p>
+              <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Zip Code:</span>  {order.selectedAddress?.pinCode}</p>
             </div>
           </div>
           <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-            <p className="text-sm leading-6 text-gray-500"><span className='font-semibold text-lg '>Phone:</span>  {order.selectedAddress.phone}</p>
-            <p className="text-sm leading-6 text-gray-500"><span className='font-semibold text-lg '>Email:</span>  {order.selectedAddress.email}</p>
-            <p className="text-sm leading-6 text-gray-500"><span className='font-semibold text-lg '>State:</span>  {order.selectedAddress.state}</p>
+            <p className="text-sm leading-6 text-gray-500"><span className='font-semibold text-lg '>Phone:</span>  {order.selectedAddress?.phone}</p>
+            <p className="text-sm leading-6 text-gray-500"><span className='font-semibold text-lg '>Email:</span>  {order.selectedAddress?.email}</p>
+            <p className="text-sm leading-6 text-gray-500"><span className='font-semibold text-lg '>State:</span>  {order.selectedAddress?.state}</p>
              
               
             

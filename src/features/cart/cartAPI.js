@@ -30,13 +30,16 @@ export function updateCart(update) {
 
 
 export function deleteItemFromCart(itemId) {
+
   return new Promise(async (resolve) => {
     const response = await fetch('http://localhost:8080/cart/'+itemId, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
     });
+    // abobe operation se db se to delete ho gya but return me kuch nhi aayega via json server , then hme aasync ko explicitly deleted item ki id send krni hogi , so that frontend ki cart bucket i.e cartItems se bhi vo delete kiya ja ske 
     const data = await response.json();
     // TODO: on server it will only return some info of user (not password)
+    console.log("Data ater deletion :",data);
     resolve({ data:{id:itemId} });
   });
 }

@@ -5,7 +5,7 @@ import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon, ChevronRightIcon,StarIcon } from "@heroicons/react/20/solid";
 import { selectAllProducts,fetchAllProductsAsync,fetchAllBrandsAsync,fetchAllCategoriesAsync, fetchAllProductsByFiltersAsync, selectTotalItems, selectAllBrands, selectAllCategories } from "../../Product/ProductSlice";
-import { ITEM_PER_PAGE } from "../../../app/constant";
+import { ITEM_PER_PAGE, discountedPrice } from "../../../app/constant";
 
       import {
         ChevronDownIcon,
@@ -485,7 +485,7 @@ const totalPages = Math.ceil(totalItems/ITEM_PER_PAGE)
                         <div
                         onClick={e=>handlePage(index+1)}
                         aria-current="page"
-                        className={`relative z-10 inline-flex items-center ${index+1===page?"bg-indigo-600 text-white":"text-gray-800 bg-white"}  px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                        className={`relative z-10 inline-flex items-center ${index+1===page?"bg-indigo-600 text-white":"text-gray-800 bg-white"}  px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                       >
                         {index+1}
                       </div>
@@ -552,7 +552,7 @@ function ProductGrid({products,filters}){
               </div>
               <div>
               <p className="text-sm font-medium text-gray-900">
-               ${Math.round(product.price*(1-product.discountPercentage/100))}
+               ${Math.round( discountedPrice(product))}
               </p>
               <p className="text-sm  line-through font-medium text-gray-700">
                ${product.price}

@@ -6,17 +6,19 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteItemFromCartAsync, selectItems, updateCartAsync } from '../features/cart/cartSlice'
+import { deleteItemFromCartAsync, selectCartItems, updateCartAsync } from '../features/cart/cartSlice'
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, updateUserAsync } from '../features/auth/authSlice'
 import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice'
 import { selectUserInfo } from '../features/user/userSlice'
+import { discountedPrice } from '../app/constant'
 
 
 
 
 
 const Checkout = () => {
+  console.log("Welcome to order page : ");
     const [open, setOpen] = useState(true)
     const {register,handleSubmit,reset,watch,formState: { errors },  } = useForm()
     const user= useSelector(selectUserInfo);
@@ -25,13 +27,13 @@ const Checkout = () => {
     const currentOrder = useSelector(selectCurrentOrder)
 
 
-    const items  = useSelector(selectItems)
+    const items  = useSelector(selectCartItems)
     const dispatch = useDispatch()
-    const totalAmount = items.reduce((amount,item)=>item.price*item.quantity +amount,0)
+    const totalAmount = items.reduce((amount,item)=>discountedPrice(item)*item.quantity +amount,0)
     const totalItems = items.reduce((total,item)=>item.quantity +total,0)
      
     const handleQuantity=(e,item)=>{
-      dispatch(updateUserAsync({...user, quantity:+e.target.value}))
+      dispatch(updateCartAsync({...item, quantity:+e.target.value}))
   
     }
   
@@ -62,8 +64,9 @@ const Checkout = () => {
 
 
     }
+    console.log("current order is :", currentOrder);
 
-console.log( "In checkzout", user);
+console.log( "In checkzout current User info is : ", user);
 
   return (
     <>
@@ -80,14 +83,16 @@ console.log( "In checkzout", user);
         <form
           noValidate
           onSubmit={handleSubmit((data) => {
-            console.log(data);
-            console.log(user);
+            console.log("New address to be added : ",data);
+            console.log("User info before adding above address: ",user);
             dispatch(
               updateUserAsync({
                 ...user,
                 addresses: [...user.addresses, data],
               })
             );
+            console.log("User info after adding above address: ",user);
+
             reset()
            
           })}  
@@ -328,7 +333,7 @@ console.log( "In checkzout", user);
                   <h3>
                     <a href={item.href}>{item.title}</a>
                   </h3>
-                  <p className="ml-4">${item.price}</p>
+                  <p className="ml-4">${discountedPrice(item)}</p>
                 </div>
                 <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
               </div>

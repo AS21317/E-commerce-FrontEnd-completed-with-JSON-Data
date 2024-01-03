@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductByIdAsync, selectProductById } from '../ProductSlice';
+import { fetchProductByIdAsync, selectProductById, selectProductListStatus } from '../ProductSlice';
 import { useParams } from 'react-router-dom';
-import { addToCartAsync } from '../../cart/cartSlice';
+import { addToCartAsync, selectCartItems } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
+import { discountedPrice } from '../../../app/constant';
+import { useAlert } from "react-alert";
+import { Grid } from 'react-loader-spinner';
 
 
   const  colors  =  [
@@ -46,29 +49,65 @@ function classNames(...classes) {
 
 
 export default function ProductDetails() {
+
+  const alert = useAlert();
+
   const [selectedColor, setSelectedColor] = useState(colors[0])
   const [selectedSize, setSelectedSize] = useState(sizes[2])
   const product = useSelector(selectProductById)
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
-
+  const availableCartItems = useSelector(selectCartItems)
+  const status = useSelector(selectProductListStatus)
+  // console.log("Available cart item is : ",availableCartItems);
+  // console.log("Product Id is : ",product.id);
+  
   const params = useParams()  //ye sare variable routes lake deta hai hme 
+  console.log("Welcome to product detail Page, after clicking on product id: ",params.id);
+  console.log("Initial available  Product and User Info: ",product,user);
+
+
 
 
   const handleCart=(e)=>{
     e.preventDefault()
-    const newItem = {...product , quantity:1,user:user.id}
-    delete newItem['id']; // ab json server apni id bnayega each item ke liye , and same item can be added multiple time now
-  dispatch(addToCartAsync(newItem))
+    if(availableCartItems.findIndex(el=>el.productId === product.id)<0)
+    {
+     
+    
+      const newItem = {...product , quantity:1,productId:product.id,user:user.id}  //cart me add krte time hr item ki product id ko save kr lo productId name se , so that use baad me match kraya ja ske 
+      delete newItem['id']; // ab json server apni id bnayega each item ke liye , and same item can be added multiple time now
+    dispatch(addToCartAsync(newItem))
+    // TODO: Alert message will be based on server respond of backend ----> later 
+    alert.success("Item Added Successfully !! ");
+
+    }
+    else{
+     
+      console.log("Product Already Exist In Cart"); 
+      alert.error("Item Already Exist In Cart !! ");
+    }
+  
 
   }
 
   useEffect(()=>{
+    console.log("Calling useeffect to get clicked product info by ID:");
     dispatch(fetchProductByIdAsync(params.id))
   },[dispatch,params.id])
 
   return (
     <div className="bg-white">
+        {status === 'loading'?<Grid
+  visible={true}
+  height="80"
+  width="80"
+  color="rgb(79 ,70 ,229)"
+  ariaLabel="grid-loading"
+  radius="12.5"
+  wrapperStyle={{}}
+  wrapperClass="grid-wrapper"
+  />:null}
      {product&&<div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -142,7 +181,8 @@ export default function ProductDetails() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+            <p className="text-3xl tracking-tight line-through text-gray-900">{product.price}</p>
+            <p className="text-3xl tracking-tight  text-gray-900">{discountedPrice(product)}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -265,13 +305,16 @@ export default function ProductDetails() {
               </div>
 
               <button
-              onClick={handleCart}
+              onClick={(e)=>handleCart(e)}
                 type="submit"  
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Add to Cart
               </button>
+             
+
             </form>
+       
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">

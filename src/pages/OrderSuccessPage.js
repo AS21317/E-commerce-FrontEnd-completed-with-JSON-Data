@@ -14,7 +14,7 @@ function OrderSuccessPage(){
     const user = useSelector(selectLoggedInUser)
 
     useEffect(()=>{
-      dispatch(resetCartAsync(user.id))  //---> यहा पर वो यूजर id पास करो जिसका cart खाली करना है 
+      dispatch(resetCartAsync(user?.id))  //---> यहा पर वो यूजर id पास करो जिसका cart खाली करना है 
 
       // curent order ko bhi sath me hi reset krna hai so that next time order krte time clash na ho 
 

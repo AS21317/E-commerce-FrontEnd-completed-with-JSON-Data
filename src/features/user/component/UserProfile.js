@@ -8,6 +8,7 @@ import { selectUserInfo, updateUserAsync } from '../userSlice'
 import { useForm } from 'react-hook-form'
 
  export default  function  UserProfile  () {
+  console.log("Welcome to my profile Page: ");
     const dispatch = useDispatch()
     const user = useSelector(selectUserInfo)
     const {register,handleSubmit,reset,setValue,watch,formState: { errors },  } = useForm()
@@ -390,7 +391,7 @@ import { useForm } from 'react-hook-form'
       <div className="min-w-0 flex-auto">
         <p className="text-sm font-semibold leading-6 text-gray-900"><span className='font-semibold text-lg '>Name:</span>  {address.name}</p>
         <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Street:</span>  {address.street}</p>
-        <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Zip Code:</span>  {address.pincode}</p>
+        <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span className='font-semibold text-lg '>Zip Code:</span>  {address.pinCode}</p>
       </div>
     </div>
     <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">

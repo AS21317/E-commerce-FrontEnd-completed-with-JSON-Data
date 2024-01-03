@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice,current } from '@reduxjs/toolkit';
 import { addToCart, deleteItemFromCart, fetchCount, fetchItemsByUserId, resetCart, updateCart } from './cartAPI';
 
 const initialState = {
   status: 'idle',
-  items: [],
+  cartItems: [],
 };
 
 
@@ -28,6 +28,7 @@ export const fetchItemsByUserIdAsync = createAsyncThunk(
 export const updateCartAsync = createAsyncThunk(
   'cart/updateCart', 
   async (update) => {
+    console.log("Before db call to update , printing updated object :",update);
     const response = await updateCart(update);
     return response.data;
   }
@@ -47,6 +48,7 @@ export const deleteItemFromCartAsync = createAsyncThunk(
   'cart/deleteItemFromCart', 
   async (itemId) => {
     const response = await deleteItemFromCart(itemId);
+    console.log("recieved data after db deletion in async: ",response,response.data);
     return response.data;
   }
 );
@@ -68,37 +70,44 @@ export const counterSlice = createSlice({
       })
       .addCase(addToCartAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.items.push(action.payload);
+        state.cartItems.push(action.payload);
       })
       .addCase(fetchItemsByUserIdAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchItemsByUserIdAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.items = action.payload;
+        state.cartItems = action.payload;
       })
       .addCase(updateCartAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(updateCartAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        const index = state.items.findIndex((item)=>item.id===action.payload.id)
-        state.items[index] = action.payload;
+        console.log("after db updation in cart , printing updated object : ",action.payload);
+        console.log(state.cartItems);
+        const index = state.cartItems.findIndex((item)=>item.id===action.payload.id)
+        console.log("after db updation in cart , printing  object before updation in redux cartItems  state : ",current(state.cartItems[index]));
+
+
+        state.cartItems[index] = action.payload;
+        console.log("after db updation in cart , printing  object after updation in redux cartItems  state : ",(state.cartItems[index]));
+
       })
       .addCase(deleteItemFromCartAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(deleteItemFromCartAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        const index = state.items.findIndex((item)=>item.id===action.payload.id)
-        state.items.splice(index,1);
+        const index = state.cartItems.findIndex((item)=>item.id===action.payload.id)
+        state.cartItems.splice(index,1);
       })
       .addCase(resetCartAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(resetCartAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.items=[]
+        state.cartItems=[]
       });
 
   },
@@ -107,7 +116,9 @@ export const counterSlice = createSlice({
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 
-export const selectItems = (state) => state.cart.items;
+export const selectCartItems = (state) => state.cart.cartItems;
+export const selectCartItemsStatus = (state) => state.cart.status;
+
 
 
 

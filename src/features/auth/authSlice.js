@@ -74,6 +74,9 @@ export const counterSlice = createSlice({
       .addCase(checkUserAsync.fulfilled, (state,action) => {
         state.status = 'loading';
         state.loggedInUser =  action.payload;
+        console.log(
+          "Filling loggedin user info into loggedinUser substate:"
+        );
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = 'idle';
